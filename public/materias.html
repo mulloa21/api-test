@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API RESTful - Usuario</title>
+        <link rel="stylesheet" type="text/css" href="estilos.css" />
+        <script type="text/javascript" src="scriptmateria.js"></script>
+    </head>
+    <body>
+        <h1>API RESTful</h1>
+        <h2>Materia</h2>
+        <div id="materia">
+            <label>Nombre:</label>
+            <input type="text" id="nombre" value=""/>
+            <label>Creditos:</label>
+            <input type="text" id="creditos" value=""/>
+            <button onclick="guardar_materia()">Guardar</button>
+            <button onclick="cancelar_materia()">Cancelar</button>
+        </div>
+
+        <h2>Actualizar Materia</h2>
+            <div id="actualizar_usuario">
+                <label>ID:</label>
+                <input type="text" id="id" value=""/>
+                <label>Nombre:</label>
+                <input type="text" id="nombre_actualizar" value=""/>
+                <label>Creditos:</label>
+                <input type="text" id="creditos_actualizar" value=""/>
+                <button onclick="actualizar_materia()">Actualizar</button>
+            </div>
+
+    
+            <h2>Eliminar Materia</h2>
+            <div id="eliminar_materia">
+                <label>ID:</label>
+                <input type="text" id="id_eliminar" value=""/>
+                <button onclick="eliminar_materia()">Eliminar</button>
+            </div>
+
+            <h2>Lista de Materias</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Creditos</th>
+                        <th>Fecha de Registro</th>
+                        <th>Fecha de Actualización</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-materias">
+                    <!-- Aquí se insertarán las filas de usuarios dinámicamente -->
+                </tbody>
+            </table>
+
+    </body>
+</html>
