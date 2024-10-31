@@ -9,7 +9,8 @@ function guardar() {
         const request_options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('token')
             },
             body: JSON.stringify(data) 
         };
@@ -42,7 +43,8 @@ function actualizar_materia() {
         const request_options = {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('token')
             },
             body: JSON.stringify(data)
         };
@@ -69,7 +71,8 @@ function eliminar_materia() {
 
     
     fetch(`/materia/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: { Authorization: localStorage.getItem('token')}
     })
     .then(response => {
         if (response.ok) {
@@ -91,7 +94,9 @@ function eliminar_materia() {
 
 
 function listar_materias() {
-    fetch('/materia')
+    fetch('/materia', {
+        headers: { Authorization: localStorage.getItem('token')}
+        })
         .then(response => response.json())
         .then(data => {
             if (data.error) {

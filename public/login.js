@@ -15,9 +15,16 @@ function login() {
 
             fetch('/auth/login', request_options)
                 .then((data) => {
-                    resolve(data.json());
-                    console.log(data.json());
-                    localStorage.setItem('token', data.json().token);
+                data.json().then((data) => {
+                    console.log(data);
+                    if(data.token) {
+                        localStorage.setItem('token', data.token);
+                        document.location.href = "materias.html";
+                    }else{
+                        alert("Error al Iniciar Sesión");
+                    }
+
+                })
                 })
                 .catch((error) => reject(`[error]: ${error}`));
         })
