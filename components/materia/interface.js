@@ -2,31 +2,32 @@ const express = require('express')
 
 const controller = require('./controller')
 const response = require('../../network/response')
+const { authorizeAdmin, authorizeUser } = require('../../auth/authMiddleware');
 
 const routes = express.Router()
 
-routes.post('/', function(req, res) {
+routes.post('/', authorizeAdmin, function(req, res) {
     controller.insertar_materia( req.body )
         .then( (data) => response.success(req, res, data, 200) )
         .catch( (error) => response.error(req, res, error, 400) )
 })
-
-routes.get('/', function(req, res) {
+//No se valida el rol
+routes.get('/',authorizeUser, function(req, res) {
     controller.obtener_materia( req.body )
         .then( (data) => response.success(req, res, data, 200) )
         .catch( (error) => response.error(req, res, error, 400) )
 })
 
-routes.put('/:id', function(req, res) {
+routes.put('/:id', authorizeAdmin, function(req, res) {
     const materiaId = req.params.id; // Obtener el ID de la materia a actualizar
     controller.actualizar_materia(materiaId, req.body)
         .then((data) => response.success(req, res, data, 200))
         .catch((error) => response.error(req, res, error, 400));
 });
 
-routes.delete('/:id', function(req, res) {
+routes.delete('/:id', authorizeAdmin,function(req, res) {
     const materiaId = req.params.id; // Obtener el ID de la materia a eliminar
-    controller.eliminar_materia(userId)
+    controller.eliminar_materia(materiaId)
         .then((data) => response.success(req, res, data, 200))
         .catch((error) => response.error(req, res, error, 400));
 });

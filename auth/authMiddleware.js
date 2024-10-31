@@ -22,4 +22,20 @@ function authorizeRole(rol) {
     };
 }
 
-module.exports = { verifyToken, authorizeRole };
+// Middleware to authorize only Admins
+function authorizeAdmin(req, res, next) {
+    if (req.userRol !== 'Administrador') {
+        return res.status(403).json({ error: 'Admin privileges required' });
+    }
+    next();
+}
+
+// Middleware to authorize only Users
+function authorizeUser(req, res, next) {
+    if (req.userRol !== 'usuario') {
+        return res.status(403).json({ error: 'User privileges required' });
+    }
+    next();
+}
+
+module.exports = { verifyToken, authorizeRole, authorizeAdmin, authorizeUser };

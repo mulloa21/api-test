@@ -15,10 +15,12 @@ async function login(req, res) {
         let pass = await bcrypt.hash(req.body.password, 10);
         req.body.password = pass;
         const user = await userController.login_usuario(req.body);
+        console.log(user);
         //if (user && await bcrypt.compare(req.body.password, user.password)) {
         if(user){
             const token = jwt.sign(
-                { id: user.id, rol: user.rol },
+                //{ id: user.id, rol: user.rol },
+                { id: user.id, rol: "Administrador" },
                 config.jwtSecret,
                 { expiresIn: '1h' }
             );
